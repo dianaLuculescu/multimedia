@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Seminar 1</title>
+</head>
+<body>
+    <!--<h1>Titlu</h1>
+    <h2>Subtitlu 1</h2>
+    <p>Un paragraf</p>
+    <p>Alt paragraf</p>
+    <h2>Subtitlu 2</h2>
+    <p>Un paragraf</p>
+    <p>Alt paragraf</p>
+    <h2>Subtitlu 3</h2>
+
+    <u1>
+        <li>ala</li>
+        <li>bala</li>
+        <li><p>a&lt;b  c &amp; d</p></li>
+        <li>
+            <a href="https://ase.ro">Site ASE</a>
+            <p>Ana are <strong>doua</strong><br>mere.</p>
+        </li>
+</u1>
+
+    <p>a&lt;b c &amp; d</p>
+    <a href="https://ase.ro">Site ASE</a>
+    <p>Ana are <strong>doua</strong><br>mere.</p>
+    <pre>ab c       d
+    
+    
+    
+    
+    e
+    f
+    g
+    h
+    i
+    j</pre>-->
+    <table border="1">
+        <thread>
+            <tr>
+                <th>Cod</th>
+                <th>Nume</th>
+            </tr>
+        </thread>
+        <tbody>
+
+            <tr>
+                <td rowspan="2">
+                    1.
+                </td>
+                <td>
+                    Maria
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    2.
+                </td>
+                <td>
+                    Ion
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    Numar persoane: 2
+                </td>
+               
+            </tr>
+        </tbody>
+
+    </table>
+</body>
+</html>
