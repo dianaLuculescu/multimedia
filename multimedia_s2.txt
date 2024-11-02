@@ -1,0 +1,161 @@
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Agenda telefonica</title>
+        <!--<link rel="stylesheet" type="text/css" href="agenda.css"/>-->
+        <style type="text/css">
+            body {
+                font-family: Tahoma;
+                font-size: 11pt;
+                line-height: 1.2em;
+
+                margin-top: 0px;
+                padding: 12px;
+            }
+
+            h1 {
+                color: white;
+                background-color: navy; /* se coloreaza dreptunghiul asociat*/
+                margin: -12px;
+                margin-bottom: 20px;
+                padding:16px;
+            }
+
+            table {
+                border: 1px solid gray;
+                border-collapse: collapse;
+            }
+
+            td, th {
+                padding: 8px 12px;
+                border-bottom: 1px solid gray;
+            }
+
+            caption {
+                padding: 8px 12px;
+                border: 1px solid gray;
+                border-bottom: none;
+                background-color: #E0E0E0;
+                font-weight: bold;
+            }
+
+            thead, tfoot {
+                background-color: #EEEEEE;
+                font-weight: bold;
+            }
+            
+            form {
+                background-color: #EEEEEE;
+                padding: 8px;
+                border: 1px solid gray;
+            }
+            
+            table {
+                float: left;
+                width: 55%;
+            }
+
+            form {
+                float: right;
+                width: 35%;
+            }
+
+            label {
+                margin: 4px;
+                display: block;
+                float: left;
+                width: 55%;
+                clear: both;
+            }
+
+            input {
+                margin: 4px;
+                display:block;
+                float: right;
+                width: 35%;
+                height: 40px;
+            }
+        </style>
+
+        <script type="text/javascript">
+            function adaugare() {
+                const tbody = document.querySelector("#table-Body");
+                const rand = document.createElement("tr");
+
+                const nume = document.querySelector("#nume").value;
+                const celulaNume = document.createElement("td");
+                celulaNume.innerText = nume;
+                rand.appendChild(celulaNume);
+
+                const prenume = document.querySelector("#prenume").value;
+                const celulaPrenume = document.createElement("td");
+                celulaPrenume.innerText = prenume;
+                rand.appendChild(celulaPrenume);
+
+                 const telefon = document.querySelector("#telefon").value;
+                 const celulaTelefon = document.createElement("td");
+                 celulaTelefon.innerText = telefon;
+                 rand.appendChild(celulaTelefon);
+
+                 tbody.appendChild(rand);
+
+                 const celula = document.querySelector ("tfoot td");
+                 celula.innerText = `Numar persoane: ${tbody.children.length}`;
+            }
+
+            function aplicatie() {
+                const button = document.querySelector("#butonAdauga");
+                button.addEventListener(`click`, adaugare);
+            }
+
+            document.addEventListener(`DOMContentLoaded`, aplicatie);
+        </script>
+    </head>
+
+    <body>
+        <h1>Agenda telefonica</h1>
+        <table>
+            <caption>Lista persoane</caption>
+            <thead>
+                <tr>
+                    <th>Nume</th>
+                    <th>Prenume</th>
+                    <th>Telefon</th>
+                </tr>
+            </thead>
+            <tbody id="table-Body">
+                <tr>
+                    <td>Popescu</td>
+                    <td>Ion</td>
+                    <td>2342342341</td>
+                </tr>
+                <tr>
+                    <td>Vasilescu</td>
+                    <td>Maria</td>
+                    <td>1231231234</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3">Numar persoane: 2</td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <form>
+            <label for="nume">Nume:</label> <!--label poate sa fie asociat pe baza id-ului prin utilizarea cuvantului cheie for-->
+            <input name="nume" id="nume" /> <!-- id - identificator unic, name - denumirea corespunzatoare valorii trimise catre server-->
+
+            <label for="prenume">Prenume:</label>
+            <input name="prenume" id="prenume" />
+
+            <label for="telefon">Telefon:</label>
+            <input name="telefon" id="telefon" />
+
+            <input type="button" id="butonAdauga" value="Adauga" />
+        </form>
+    </body>
+</html>
