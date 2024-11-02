@@ -16,7 +16,7 @@
     <p>Alt paragraf</p>
     <h2>Subtitlu 3</h2>
 
-    <u1>
+    <ul>
         <li>ala</li>
         <li>bala</li>
         <li><p>a&lt;b  c &amp; d</p></li>
@@ -24,7 +24,7 @@
             <a href="https://ase.ro">Site ASE</a>
             <p>Ana are <strong>doua</strong><br>mere.</p>
         </li>
-</u1>
+</ul>
 
     <p>a&lt;b c &amp; d</p>
     <a href="https://ase.ro">Site ASE</a>
@@ -41,12 +41,12 @@
     i
     j</pre>-->
     <table border="1">
-        <thread>
+        <thead>
             <tr>
                 <th>Cod</th>
                 <th>Nume</th>
             </tr>
-        </thread>
+        </thead>
         <tbody>
 
             <tr>
