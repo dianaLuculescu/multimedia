@@ -12,16 +12,16 @@
             const paragraf = document.querySelector("p");
             paragraf.innerText = parseInt(paragraf.innerText) + valoare;
             const log = document.createElement("p");
-            log.innerText = Am adaugat ${valoare};
+            log.innerText = `Am adaugat ${valoare}`;
             document.querySelector('body').append(log);
         }
 
         function aplicatie() {
             const buton = document.querySelector("#btnIncrementare");
-            buton.addEventListener('click', incrementare);
+            buton.addEventListener(`click`, incrementare);
         }
 
-        document.addEventListener('DOMContentLoaded', aplicatie);
+        document.addEventListener(`DOMContentLoaded`, aplicatie);
     </script>
 </head>
 <body>
@@ -40,7 +40,7 @@
 
 
 
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <title>Agenda telefonică</title>
@@ -177,7 +177,7 @@
             tbody.appendChild(rand);
 
             const celula = document.querySelector("tfoot td");
-            celula.innerText = Numar persoane: ${tbody.children.length};
+            celula.innerText = `Numar persoane: ${tbody.children.length}`;
         }
 
         function aplicatie() {
