@@ -254,7 +254,7 @@
         <input name="nume" id="nume">
         <label for="prenume">Prenume:</label>
         <input name="prenume" id="prenume">
-        <label for="Telefon">Telefon:</label>
+        <label for="telefon">Telefon:</label>
         <input name="telefon" id="telefon">
         <input type="button" id="btnAdauga" value="Adaugă">
     </form>
