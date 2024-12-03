@@ -1,0 +1,136 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Editor</title>
+    <style type="text/css">
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0px;
+            padding: 0px;
+            overflow: hidden;
+            font-family: 'Segoe UI',sans-serif;
+        }
+
+        h1 {
+            width: 100%;
+            background-color: lightblue;
+            font-style: italic;
+            margin: 0px;
+            padding: 8px;
+        }
+
+        svg {
+            width: 100%;
+            height: 100%;
+            margin: 0px;
+            padding: 0px;
+            background-color: #eaeaea;
+            cursor: crosshair;
+        }
+
+        svg rect {
+                fill: gray;
+                fill-opacity: 0.2;
+                stroke: navy;
+                stroke-opacity: 0.8;
+        }
+
+        svg #selectie {
+                fill: transparent;
+                stroke: green;
+                stroke-width: 3;
+                stroke-dasharray: 5,3;
+                display:none;
+        }
+
+        .selectat {
+            fill: magenta;
+        }
+    </style>
+
+    <script type="text/javascript">
+
+        let editor, desen, selectie;
+        let mx = 0, my = 0, x0 = 0, y0 = 0;
+        let elementSelectat = null;
+
+        function desenare() {
+            let pozitie = document.querySelector('#pozitie');
+            pozitie.innerHTML = `x: ${mx}, y: ${my}`;
+        }
+
+        function setareCoordonate(elem, x0, y0, x1, y1) {
+            elem.setAttribute('x', Math.min(x0, x1));
+            elem.setAttribute('y', Math.min(y0, y1));
+            elem.setAttribute('width',
+                Math.max(x1, x0) - Math.min(x1, x0));
+            elem.setAttribute('height',
+                Math.max(y1, y0) - Math.min(y1, y0));
+        }
+
+        function mousemove(e) {
+            mx = Math.round(e.x - editor.getBoundingClientRect().x);
+            my = Math.round(e.y - editor.getBoundingClientRect().y);
+            setareCoordonate(selectie, x0, y0, mx, my);
+        }
+
+        function mousedown() {
+            selectie.style.display = 'block';
+            x0 = mx; y0 = my;
+            setareCoordonate(selectie, x0, y0, mx, my);
+        }
+
+        function mouseup() {
+            selectie.style.display = 'none';
+
+            const rect = document.createElementNS(
+                'http://www.w3.org/2000/svg', 'rect');
+            setareCoordonate(rect, x0, y0, mx, my);
+            desen.append(rect);
+
+            rect.addEventListener('contextmenu', e => {
+                e.preventDefault();
+                if (elementSelectat) {
+                    elementSelectat.classList.remove('selectat');
+                }
+                elementSelectat = rect;
+                elementSelectat.classList.add('selectat');
+            });
+
+        }
+
+        function aplicatie() {
+            editor = document.querySelector('#editor');
+            desen = document.querySelector('#desen');
+            selectie = document.querySelector('#selectie');
+
+            editor.addEventListener('mousedown', mousedown);
+            editor.addEventListener('mouseup', mouseup);
+            editor.addEventListener('mousemove', mousemove);
+
+            setInterval(desenare, 1000 / 30);
+
+        }
+        document.addEventListener('DOMContentLoaded', aplicatie);
+
+    </script>
+</head>
+
+<body>
+    <h1>Editor SVG</h1>
+
+    <svg id="editor">
+        <g id="desen"></g>
+        <rect x="10" y="10" width="80" height="50"></rect>
+        <rect x="30" y="30" width="80" height="50"></rect>
+        <rect id="selectie" x="130" y="130" width="60" height="60"></rect>
+        <text id="pozitie" x="10" y="100" style="user-select:none;"></text>
+    </svg>
+
+</body>
+
+</html>
+   
