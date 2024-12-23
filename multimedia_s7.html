@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script type="text/javascript">
+        function aplicatie() {
+            const canvas = document.querySelector('canvas');
+            const context = canvas.getContext('2d');
+            const W = canvas.width, H = canvas.height;
+
+            context.textBaseline = 'top';
+            context.font = 'bold 14px Arial';
+
+            context.beginPath();
+            function grafic(V) {
+                const n = V.length;
+                const w = W / n;
+                const f = H * 0.9 / Math.max(...V);
+
+                for (let i = 0; i < n; i++) {
+                    const wi = w * 0.8;
+                    const hi = V[i] * f;
+                    const xi = i * w + 0.1 * w;
+                    const yi = H - hi;
+
+                    const txi = xi + wi / 2;
+                    const tyi = yi + 5;
+
+                    context.fillStyle = 'magenta';
+                    context.fillRect(xi, yi, wi, hi);
+                    context.strokeRect(xi,yi,wi,hi);
+
+                    context.fillStyle = 'black';
+                    context.fillText(V[i], txi, tyi);
+                }
+                //context.fillStyle = 'rgba(255,0,0,0.5)'; 0.5 pt a face culoarea semitransparenta
+                
+             
+            }
+            grafic([8, 3, 6, 4]);
+
+
+            //console.log(W, H, context);
+
+            //context.fillStyle = 'magenta';
+            //context.lineWidth = 6;
+            //context.fillRect(0, 0, W / 2, H / 2);
+
+            //context.strokeStyle = 'purple';
+            //context.lineWidth = 6;
+            //context.strokeRect(0, 0, W / 2, H / 2);
+           
+
+            //context.fillStyle = 'blue';
+            //context.font = '30px Arial';
+            //context.textAlign = 'center';
+            //context.textBaseline = 'middle';
+            //context.fillText(`Diana`, W / 4, H / 4);
+
+            //context.fillStyle = 'black';
+            //context.fillRect(W / 4, H / 4, 3, 3);
+
+            //context.beginPath();
+            //context.moveTo(W / 2, H / 2);
+            //context.lineTo(3 * W / 4, H);
+            //context.lineTo(W, H / 2);
+            //context.closePath();
+            //context.fillStyle = 'pink';
+            //context.fill();
+            //context.stroke();
+            
+        }
+        document.addEventListener('DOMContentLoaded', aplicatie);
+    </script>
+</head>
+<body>
+    <canvas width="400" height="300"
+            style="border: 1px solid red;">
+
+    </canvas>
+</body>
+</html>
