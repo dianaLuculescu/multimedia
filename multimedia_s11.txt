@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Player audio</title>
+
+    <script type="text/javascript">
+
+        //1.Model
+        let audio, canvas, context, W, H, mx = 0, my = 0;
+        let urls = [
+            'http://ase.softmentor.ro/waltz2.mp3',
+            'https://archive.org/download/Bolero_201901/Bolero.mp3',
+            'http://ase.softmentor.ro/waltz2.mp3'
+        ];
+        let urlIndex = 0;
+            
+
+        function desenare() {
+            //stergere scena
+            context.fillStyle = 'black';
+            context.fillRect(0, 0, W, H);
+            context.fillStyle = 'white';
+            context.font = 'bold 12pt Tahoma';
+            context.fillText(s ${audio.currentTime}, 10, 15);
+
+            //desenare progres bar
+            context.fillStyle = 'gray';
+            context.fillRect(0, H / 2, W, H / 2);
+            const pbWidth = audio.duration ? audio.currentTime * W / audio.duration : 0;
+            context.fillStyle = 'pink';
+            context.fillRect(0, H / 2, pbWidth, H / 2);
+
+            const lista = document.querySelector('ul');
+            lista.innerHTML = '';
+            for (let i = 0; i < urls.length; i++) {
+                const li = document.createElement('li');
+                li.innerText = urls[i];
+                if (i == urlIndex) li.style.color = 'red';
+                li.dataset.index = i.toString();
+                li.addEventListener('mousedown', e => {
+                    urlIndex = parseInt(e.target.dataset.index);
+                    avanseaza(0);
+                });
+
+                lista.appendChild(li);
+            }
+
+            requestAnimationFrame(desenare);
+        }
+
+        function avanseaza(delta) {
+            urlIndex = urlIndex + delta;
+            if (urlIndex < 0) urlIndex = urls.length - 1;
+            if (urlIndex >= urls.length) urlIndex = 0;
+            audio.src = urls[urlIndex];
+            audio.load();
+            audio.play();
+
+        }
+
+        function canvasMouseMove(e) {
+            mx = e.x - canvas.getBoundingClientRect().x;
+            my = e.y - canvas.getBoundingClientRect().y;
+        }
+        const buttonSize = 30;
+        function canvasMouseDown(e) {
+            if (my > H / 2) {
+                audio.currentTime = audio.duration ? mx * audio.duration / W : 0;
+            } else {
+                const buttonIndex = Math.floor((mx - 0) / buttonSize);
+                switch (buttonIndex) {
+                    case 0: avanseaza(-1); break;
+                    case 1: audio.paused ? audio.play() : audio.pause(); break;
+                    case 2: avanseaza(1); break;
+                }
+            }
+        }
+
+        function aplicatie() {
+            canvas = document.querySelector('canvas');
+            context = canvas.getContext('2d');
+            W = canvas.width; H = canvas.height;
+            audio = document.querySelector('audio');
+
+            audio.addEventListener('ended', e => avanseaza(1));
+            canvas.addEventListener('mousemove', canvasMouseMove);
+            canvas.addEventListener('mousedown', canvasMouseDown);
+            desenare();
+        }
+        document.addEventListener('DOMContentLoaded', aplicatie);
+    </script>
+</head>
+<body>
+    <audio src="http://ase.softmentor.ro/waltz2.mp3" controls></audio>
+    <canvas width="400" height="60"></canvas>
+    <ul></ul>
+
+</body>
+</html>
